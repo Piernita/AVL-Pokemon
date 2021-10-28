@@ -77,6 +77,7 @@ int Noh::InformarAltura(Noh* UmNoh){
 	}
 }
 
+//implementado
 class avl {
     friend ostream& operator<<(ostream& output, avl& arvore);
     private:
@@ -133,6 +134,7 @@ void avl::destruirRecursivamente(Noh* UmNoh) {
 	}
 }
 
+// Chama inserir na raiz
 void avl::insere(const dado& UmDado) {
     raiz = insereAux(raiz, UmDado);
 }
@@ -189,7 +191,7 @@ Noh* avl::arrumaBalanceamento(Noh* UmNoh) {
 }
 
 
-// rotaÃ§Ã£o Ã  esquerda na subÃ¡rvore com raiz em umNoh
+// rotaÃ§Ã£o esquerda na subÃ¡rvore com raiz em umNoh
 // retorna o novo pai da subÃ¡rvore
 Noh* avl::rotacaoEsquerda(Noh* UmNoh) {
     ///Implementado
@@ -207,7 +209,7 @@ Noh* avl::rotacaoEsquerda(Noh* UmNoh) {
 }
 
 
-// rotaÃ§Ã£o Ã  direita na subÃ¡rvore com raiz em umNoh
+// rotaÃ§Ã£o ï¿½  direita na subÃ¡rvore com raiz em umNoh
 // retorna o novo pai da subÃ¡rvore
 Noh* avl::rotacaoDireita(Noh* UmNoh) {
     //Implementado
@@ -272,6 +274,7 @@ Noh* avl::buscaAux(tipoChave chave) {
 }
 
 // busca elemento com uma dada chave na Ã¡rvore e retorna o registro completo
+// implementado
 dado avl::busca(tipoChave chave) {
     Noh* resultado = buscaAux(chave);
     if (resultado != NULL)
@@ -281,11 +284,11 @@ dado avl::busca(tipoChave chave) {
 }
 
 // procedimento auxiliar para remover o sucessor substituÃ­ndo-o pelo
-// seu filho Ã  direita
+// seu filho ï¿½  direita
 Noh* avl::removeMenor(Noh* raizSub) {
     //Implementado
     // procedimento auxiliar para remover o sucessor substituindo-o
-	// pelo seu filho à direita
+	// pelo seu filho ï¿½ direita
     if(raizSub->PtEsq == NULL){	// encontrou o sucessor
 		return raizSub->PtDir;
 	}
@@ -314,33 +317,33 @@ Noh* avl::removeAux(Noh* UmNoh, tipoChave chave) {
     	throw runtime_error("ERRO");
 	}
 	Noh* NovaRaiz = UmNoh;
-	// valor é menor que nó atual, vai para subárvore esquerda
+	// valor ï¿½ menor que nï¿½ atual, vai para subï¿½rvore esquerda
 	if(chave < UmNoh->elemento.id){
 		UmNoh->PtEsq = removeAux(UmNoh->PtEsq, chave);
 	}
-	// valor é maior que nó atual, vai para subárvore direita
+	// valor ï¿½ maior que nï¿½ atual, vai para subï¿½rvore direita
 	else if(chave > UmNoh->elemento.id){
 		UmNoh->PtDir = removeAux(UmNoh->PtDir, chave);
 	}
 	else{
-		// nó não tem filhos à esquerda
+		// nï¿½ nï¿½o tem filhos ï¿½ esquerda
 		if(UmNoh->PtEsq == NULL){
 			NovaRaiz = UmNoh->PtDir;
 		}
-		 // nó não tem filhos à direita
+		 // nï¿½ nï¿½o tem filhos ï¿½ direita
 		else if(UmNoh->PtDir == NULL){
 			NovaRaiz = UmNoh->PtEsq;
 		}
-		// nó tem dois filhos
+		// nï¿½ tem dois filhos
 		else{
 			// trocando pelo sucessor
 			NovaRaiz = Minimo(UmNoh->PtDir);
 			// onde antes estava o sucessor fica agora seu filho a direita
 			NovaRaiz->PtDir = removeMenor(UmNoh->PtDir);
-			// filho à esquerda de umNoh torna-se filho à esquerda de sucessor
+			// filho ï¿½ esquerda de umNoh torna-se filho ï¿½ esquerda de sucessor
 			NovaRaiz->PtEsq = UmNoh->PtEsq;
 		}
-		// ponteiros ajustados, apagamos o nó
+		// ponteiros ajustados, apagamos o nï¿½
 		delete UmNoh;
 	}
 	return arrumaBalanceamento(NovaRaiz);
@@ -378,7 +381,7 @@ ostream& operator<<(ostream& output, avl& arvore) {
 }
 
 // imprime formatado seguindo o padrao tree as subarvores direitas de uma avl
-// Mesmo sendo pedido para não alterar, tive de fazer pois não foi possivel visualizar a impressao
+// Mesmo sendo pedido para nï¿½o alterar, tive de fazer pois nï¿½o foi possivel visualizar a impressao
 void avl::imprimirDir(const std::string& prefixo, const Noh* meuNoh)
 {
     if( meuNoh != NULL )
@@ -392,7 +395,7 @@ void avl::imprimirDir(const std::string& prefixo, const Noh* meuNoh)
 }
 
 // imprime formatado seguindo o padrao tree as subarvores direitas de uma avl
-// Mesmo sendo pedido para não alterar, tive de fazer pois não foi possivel visualizar a impressao
+// Mesmo sendo pedido para nï¿½o alterar, tive de fazer pois nï¿½o foi possivel visualizar a impressao
 void avl::imprimirEsq(const std::string& prefixo, const Noh* meuNoh, bool temIrmao)
 {
     if( meuNoh != NULL )
@@ -413,7 +416,7 @@ void avl::imprimirEsq(const std::string& prefixo, const Noh* meuNoh, bool temIrm
 }
 
 // imprime formatado seguindo o padrao tree uma avl
-// Mesmo sendo pedido para não alterar, tive de fazer pois não foi possivel visualizar a impressao
+// Mesmo sendo pedido para nï¿½o alterar, tive de fazer pois nï¿½o foi possivel visualizar a impressao
 void avl::imprimir(){
 	if(raiz != NULL){
 		cout << "(" << raiz->elemento.id << "," << raiz->elemento.nome << ")" << endl;
